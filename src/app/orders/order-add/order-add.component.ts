@@ -40,7 +40,7 @@ export class OrderAddComponent implements OnInit {
         console.log(resData);
         this.showSuccess = true;
         this.showError = false;
-        this.success = "Order ID" + resData.Order_ID + " added";
+        this.success = "Order ID " + resData.Order_ID + " added";
         this.orderService.reloadOrder.next(true);
 
       },

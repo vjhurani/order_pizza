@@ -39,10 +39,15 @@ export class AuthService {
       );;
   }
 
+  logout() {
+    this.authResponse.next(null)
+  }
+
   private handleAuthentication(
     access_token: string
   ) {
-    const nextAuthResponse = new AuthResponse(access_token);
+    const expDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
+    const nextAuthResponse = new AuthResponse(access_token,expDate);
     this.authResponse.next(nextAuthResponse);
   }
 

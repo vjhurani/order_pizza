@@ -40,7 +40,7 @@ export class OrderListComponent implements OnInit
         console.log(resData);
         this.showSuccess = true;
         this.showError = false;
-        this.success = "Order ID" + selectedItem.Order_ID + " deleted";
+        this.success = "Order ID " + selectedItem.Order_ID + " deleted";
         this.orderService.getOrders().subscribe(
           result => {
             this.orders = result;

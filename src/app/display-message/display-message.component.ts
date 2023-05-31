@@ -10,4 +10,11 @@ export class DisplayMessageComponent {
   @Input() showChildError: boolean= false;
   @Input() errorChild: string = ""
   @Input() successChild: string = "Success"
+
+  fadeOut() {
+    setTimeout( () => {
+      this.showChildError = false;
+      this.showChildSuccess = false;
+    }, 4000);
+  }
 }

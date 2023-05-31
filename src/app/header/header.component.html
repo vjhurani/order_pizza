@@ -1,9 +1,14 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand mx-auto">Pizza Order</a>
+      <a  class="navbar-brand">Pizza Order</a>
     </div>
 
+    <div class="navbar-right" *ngIf="showLogout">
+      <div class="navbar-brand navbar-brand-right" >
+        <a  style="cursor: pointer" (click)="onLogout()" >Logout</a>
+      </div>
+    </div>
 
   </div>
 </nav>
