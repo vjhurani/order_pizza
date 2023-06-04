@@ -9,7 +9,7 @@ import {DisplayMessageModel} from "../../display-message/display-message.model";
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.css']
 })
-export class OrderListComponent implements OnInit
+export class OrderListComponent implements OnInit, OnDestroy
 {
   searchData: string =""
   showError = false;
@@ -17,8 +17,7 @@ export class OrderListComponent implements OnInit
   success : string = ""
   error: string = null;
   orders: Order[] = [
-    new Order('Thin', 'Spicy', 123, 'small',100,'100000'),
-    new Order('Cheese', 'Hot', 456,'large',200,'100000'),
+
   ];
 
   serviceCalledExternally : boolean = false;
@@ -72,5 +71,9 @@ export class OrderListComponent implements OnInit
           });
       }
 
+  }
+
+  ngOnDestroy(): void {
+    this.orderService.reloadOrder.unsubscribe();
   }
 }
