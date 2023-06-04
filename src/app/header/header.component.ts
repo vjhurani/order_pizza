@@ -1,17 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 
-interface onDestroy {
-}
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit, onDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
   showLogout: boolean = false;
   private userSubscription: Subscription;
 
@@ -22,7 +21,7 @@ export class HeaderComponent implements OnInit, onDestroy {
   ngOnInit(): void {
     this.userSubscription = this.authService.authResponse.subscribe(
     data=>{
-      if (!!data.token){
+      if ( !!data && !!data.token){
         this.showLogout = true;
       }
       else{

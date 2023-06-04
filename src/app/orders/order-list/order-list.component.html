@@ -1,16 +1,18 @@
 <div class="row">
   <div class="col-xs-12">
-    <div class="panel-group">
+
       <div class="panel panel-default">
+        <div class="panel-heading"><h2 class="panel-title text-center">Orders</h2></div>
         <div class="panel-body">
-          <div class="row">
+
+          <div class="row ">
             <div class="col-xs-6">
               <div class="form-group">
                 <input type="text" class="form-control search-field" placeholder="Search" [(ngModel)] = "searchData" />
               </div>
             </div>
           </div>
-          <app-display-message [showChildSuccess]="showSuccess" [showChildError]="showError" [errorChild]="error" [successChild]="success" ></app-display-message>
+
           <div class="row">
             <div class="col-xs-12">
 
@@ -55,6 +57,6 @@
       </div>
     </div>
   </div>
-</div>
+
 
 

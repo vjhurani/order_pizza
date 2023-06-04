@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import {Order} from "../orders/order.model";
 import {AuthRequest} from "../auth/auth-request.model";
 import {AuthResponse} from "../auth/auth-response.model";
+import {DisplayMessageModel} from "../display-message/display-message.model";
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,7 +14,7 @@ export class OrderService {
 
   private orderUrl = 'https://pizza-api-app.herokuapp.com/api/orders';  // URL to web api
   reloadOrder = new Subject<boolean>();
-
+  display_message = new Subject<DisplayMessageModel>();
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };

@@ -9,7 +9,6 @@ import { HeaderComponent } from './header/header.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderListComponent } from './orders/order-list/order-list.component';
 import { OrderAddComponent } from './orders/order-add/order-add.component';
-import { OrderItemComponent } from './orders/order-list/order-item/order-item.component';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -28,7 +27,7 @@ import { DisplayMessageComponent } from './display-message/display-message.compo
     OrdersComponent,
     OrderListComponent,
     OrderAddComponent,
-    OrderItemComponent,
+
     SearchOrder,
     AuthComponent,
     ErrorPageComponent,

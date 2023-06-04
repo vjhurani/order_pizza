@@ -46,6 +46,7 @@ export class AuthService {
   private handleAuthentication(
     access_token: string
   ) {
+
     const expDate = new Date(new Date().getTime() + (1000 * 60 * 60 * 24));
     const nextAuthResponse = new AuthResponse(access_token,expDate);
     this.authResponse.next(nextAuthResponse);

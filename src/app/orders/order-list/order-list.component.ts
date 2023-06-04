@@ -1,7 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Order} from "../order.model";
 import {OrderService} from "../../services/order.service";
 import {Observable} from "rxjs";
+import {DisplayMessageModel} from "../../display-message/display-message.model";
 
 @Component({
   selector: 'app-order-list',
@@ -20,16 +21,11 @@ export class OrderListComponent implements OnInit
     new Order('Cheese', 'Hot', 456,'large',200,'100000'),
   ];
 
-
+  serviceCalledExternally : boolean = false;
   constructor(private orderService: OrderService) {
 
   }
 
-  reload(){
-    this.orderService.reloadOrder.subscribe(res => {
-      this.getOrders();
-    });
-  }
 
   onSelect(selectedItem: Order) {
     console.log("Selected item Id: ", selectedItem.Order_ID)
@@ -37,10 +33,8 @@ export class OrderListComponent implements OnInit
     orderObs = this.orderService.deleteOrder(selectedItem.Order_ID);
     orderObs.subscribe(
       resData => {
-        console.log(resData);
-        this.showSuccess = true;
-        this.showError = false;
-        this.success = "Order ID " + selectedItem.Order_ID + " deleted";
+        const notification = new DisplayMessageModel(true, ("Order ID " + selectedItem.Order_ID + " deleted"),false,"","delete");
+        this.orderService.display_message.next(notification);
         this.orderService.getOrders().subscribe(
           result => {
             this.orders = result;
@@ -48,28 +42,35 @@ export class OrderListComponent implements OnInit
       },
       errorMessage => {
         console.log(errorMessage);
-        this.error = errorMessage;
-        this.showSuccess = false;
-        this.showError = true;
+        const notification = new DisplayMessageModel(false, "",true,errorMessage,"delete");
+        this.orderService.display_message.next(notification);
       }
     );
 
   }
 
-    getOrders(): void{
-      this.orderService.getOrders().subscribe(
-        result => {
-          this.orders = result;
-        });
-
-    }
 
     ngOnInit(): void {
       this.orderService.reloadOrder.subscribe(res => {
         if(res) {
-          this.getOrders();
+          console.log('inside from reloadOrder')
+          this.serviceCalledExternally = true;
+          this.orderService.getOrders().subscribe(
+            result => {
+              this.orders = result;
+            });
+        }
+        else{
+          this.serviceCalledExternally = false;
         }
       });
-      this.getOrders();
+      if(!this.serviceCalledExternally){
+        console.log('inside from inital')
+        this.orderService.getOrders().subscribe(
+          result => {
+            this.orders = result;
+          });
+      }
+
   }
 }
